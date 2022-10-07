@@ -9,7 +9,11 @@
 		"dev": "nodemon --exec ts-node ./src/server.ts",
 		"prepare": "husky install",
 		"preinstall": "npx only-allow pnpm",
-		"pre-commit": "lint-staged"
+		"pre-commit": "lint-staged",
+		"prisma:pull": "prisma db pull",
+		"prisma:generate": "prisma generate",
+		"prisma:migrate": "prisma migrate dev",
+		"prisma:format": "prisma format"
 	},
 	"keywords": [
 		"REST API Template",
@@ -18,17 +22,28 @@
 	"author": "Pratik Majumdar (codadept)",
 	"license": "GPL-3.0",
 	"dependencies": {
+		"@prisma/client": "^4.4.0",
+		"@types/bcrypt": "^5.0.0",
+		"bcrypt": "^5.1.0",
+		"cookie-parser": "^1.4.6",
+		"cookie-session": "^2.0.0",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.1",
 		"helmet": "^6.0.0",
-		"morgan": "^1.10.0"
+		"morgan": "^1.10.0",
+		"passport": "0.5.2",
+		"passport-local": "^1.0.0"
 	},
 	"devDependencies": {
+		"@types/cookie-parser": "^1.4.3",
+		"@types/cookie-session": "^2.0.44",
 		"@types/cors": "^2.8.12",
 		"@types/express": "^4.17.14",
 		"@types/morgan": "^1.9.3",
 		"@types/node": "^18.8.3",
+		"@types/passport": "1.0.7",
+		"@types/passport-local": "^1.0.34",
 		"@typescript-eslint/eslint-plugin": "^5.39.0",
 		"@typescript-eslint/parser": "^5.39.0",
 		"eslint": "^8.24.0",
@@ -36,6 +51,7 @@
 		"lint-staged": "^13.0.3",
 		"nodemon": "^2.0.20",
 		"prettier": "^2.7.1",
+		"prisma": "^4.4.0",
 		"ts-node": "^10.9.1",
 		"tsc-alias": "^1.7.0",
 		"tsconfig-paths": "^4.1.0",

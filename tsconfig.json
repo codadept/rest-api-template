@@ -1,6 +1,23 @@
 {
 	"compilerOptions": {
-		"paths": {},
+		"paths": {
+			"@routes": ["./src/routes"],
+			"@routes/*": ["./src/routes/*"],
+			"@services": ["./src/services"],
+			"@services/*": ["./src/services/*"],
+			"@db": ["./src/db"],
+			"@db/*": ["./src/db/*"],
+			"@middlewares": ["./src/middlewares"],
+			"@middlewares/*": ["./src/middlewares/*"],
+			"@controllers": ["./src/controllers"],
+			"@controllers/*": ["./src/controllers/*"],
+			"@utils": ["./src/utils"],
+			"@utils/*": ["./src/utils/*"],
+			"@interfaces": ["./src/global/interfaces"],
+			"@interfaces/*": ["./src/global/interfaces/*"],
+			"@constants": ["./src/global/constants"],
+			"@constants/*": ["./src/global/constants/*"]
+		},
 		"target": "ES2016",
 		"module": "CommonJS",
 		"incremental": true,
