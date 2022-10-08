@@ -7,17 +7,17 @@ import * as Controllers from "@controllers";
 const router: Router = Router({ mergeParams: true });
 
 router.post(
-	"/login",
-	Middlewares.Auth.isNotLoggedIn,
-	passport.authenticate("local", { failWithError: true }),
-	Middlewares.Auth.passportErrorHandler,
-	Controllers.Auth.login
+  "/login",
+  Middlewares.Auth.isNotLoggedIn,
+  passport.authenticate("local", { failWithError: true }),
+  Middlewares.Auth.passportErrorHandler,
+  Controllers.Auth.login
 );
 
 router.post(
-	"/register",
-	Middlewares.Auth.isNotLoggedIn,
-	Controllers.Auth.register
+  "/register",
+  Middlewares.Auth.isNotLoggedIn,
+  Controllers.Auth.register
 );
 
 router.post("/logout", Middlewares.Auth.isLoggedIn, Controllers.Auth.logout);

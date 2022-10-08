@@ -10,7 +10,6 @@ servers:
     description: "Localhost"
 
 paths:
-
   /auth/login:
     post:
       description: "User Login"
@@ -227,5 +226,3 @@ paths:
                   message:
                     type: string
                     example: "Missing Inputs"
-
-

@@ -8,17 +8,17 @@ import * as Errors from "@error";
  * @description Checks whether user with given `identifier` exists in the database
  */
 const checkUser = async (registerBody: Interfaces.Auth.RegisterBody) => {
-	const { email, username } = registerBody;
+  const { email, username } = registerBody;
 
-	if (await DB.User.getUserFromUsername(username)) {
-		return new Errors.Auth.UsernameExist();
-	}
+  if (await DB.User.getUserFromUsername(username)) {
+    return new Errors.Auth.UsernameExist();
+  }
 
-	if (await DB.User.getUserFromEmail(email)) {
-		return new Errors.Auth.EmailExist();
-	}
+  if (await DB.User.getUserFromEmail(email)) {
+    return new Errors.Auth.EmailExist();
+  }
 
-	return null;
+  return null;
 };
 
 /**
@@ -26,17 +26,17 @@ const checkUser = async (registerBody: Interfaces.Auth.RegisterBody) => {
  * @description Check for email and password, whether satisfies the given REGEX
  */
 const validateUserInput = (registerBody: Interfaces.Auth.RegisterBody) => {
-	const { email, password } = registerBody;
+  const { email, password } = registerBody;
 
-	if (!Constants.Auth.EMAIL_REGEX.test(email)) {
-		return new Errors.Auth.InvalidEmail();
-	}
+  if (!Constants.Auth.EMAIL_REGEX.test(email)) {
+    return new Errors.Auth.InvalidEmail();
+  }
 
-	if (!Constants.Auth.PASSWORD_REGEX.test(password)) {
-		return new Errors.Auth.InvalidPassword();
-	}
+  if (!Constants.Auth.PASSWORD_REGEX.test(password)) {
+    return new Errors.Auth.InvalidPassword();
+  }
 
-	return null;
+  return null;
 };
 
 /**
@@ -44,22 +44,22 @@ const validateUserInput = (registerBody: Interfaces.Auth.RegisterBody) => {
  * @description Checks the user input in the request body whether required fields are there and are of correct data types
  */
 const checkUserInput = (registerBody: Interfaces.Auth.RegisterBody) => {
-	const { email, name, password, username } = registerBody;
+  const { email, name, password, username } = registerBody;
 
-	if (!email || !name || !password || !username) {
-		return new Errors.Common.MissingInput();
-	}
+  if (!email || !name || !password || !username) {
+    return new Errors.Common.MissingInput();
+  }
 
-	if (
-		typeof email !== "string" ||
-		typeof name !== "string" ||
-		typeof password !== "string" ||
-		typeof username !== "string"
-	) {
-		return new Errors.Common.InputTypeError();
-	}
+  if (
+    typeof email !== "string" ||
+    typeof name !== "string" ||
+    typeof password !== "string" ||
+    typeof username !== "string"
+  ) {
+    return new Errors.Common.InputTypeError();
+  }
 
-	return null;
+  return null;
 };
 
 export { checkUser, validateUserInput, checkUserInput };

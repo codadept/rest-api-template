@@ -5,11 +5,11 @@ import { prisma } from "@utils";
  * @description Returns the user with the given identifier
  */
 const getUserFromIdentifier = async (identifier: string) => {
-	return await prisma.user.findFirst({
-		where: {
-			OR: [{ email: identifier }, { username: identifier }],
-		},
-	});
+  return await prisma.user.findFirst({
+    where: {
+      OR: [{ email: identifier }, { username: identifier }],
+    },
+  });
 };
 
 /**
@@ -17,11 +17,11 @@ const getUserFromIdentifier = async (identifier: string) => {
  * @description Returns the user with the given email
  */
 const getUserFromEmail = async (email: string) => {
-	return await prisma.user.findFirst({
-		where: {
-			email,
-		},
-	});
+  return await prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
 };
 
 /**
@@ -29,11 +29,11 @@ const getUserFromEmail = async (email: string) => {
  * @description Returns the user with the given username
  */
 const getUserFromUsername = async (username: string) => {
-	return await prisma.user.findFirst({
-		where: {
-			username,
-		},
-	});
+  return await prisma.user.findFirst({
+    where: {
+      username,
+    },
+  });
 };
 
 export { getUserFromIdentifier, getUserFromEmail, getUserFromUsername };

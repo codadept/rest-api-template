@@ -14,19 +14,19 @@ import { User } from "@prisma/client";
  * @description Callback function to verify where the input provided by user matches with that from the DB. Throws error if user is not found or the password is mismatched
  */
 const verifyUser: VerifyFunction = async (identifier, password, done) => {
-	const user = await DB.User.getUserFromIdentifier(identifier);
+  const user = await DB.User.getUserFromIdentifier(identifier);
 
-	if (!user) {
-		return done(new Errors.Auth.UserNotFound().message, false);
-	}
+  if (!user) {
+    return done(new Errors.Auth.UserNotFound().message, false);
+  }
 
-	const passwordMatch = await bcrypt.compare(password, user.password);
+  const passwordMatch = await bcrypt.compare(password, user.password);
 
-	if (!passwordMatch) {
-		return done(new Errors.Auth.UsernameOrPasswordNotMatch().message, false);
-	}
+  if (!passwordMatch) {
+    return done(new Errors.Auth.UsernameOrPasswordNotMatch().message, false);
+  }
 
-	return done(null, user);
+  return done(null, user);
 };
 
 /**
@@ -35,9 +35,9 @@ const verifyUser: VerifyFunction = async (identifier, password, done) => {
  * @description Callback function to persist data (after successfull authentication) into session by serializing the email of the user
  */
 const serializeUserCallbackFunction: Interfaces.Passport.PassportSerializeUserCallback =
-	(user, done) => {
-		done(null, (user as User).email);
-	};
+  (user, done) => {
+    done(null, (user as User).email);
+  };
 
 /**
  * @param data The email of the user serialized
@@ -45,18 +45,18 @@ const serializeUserCallbackFunction: Interfaces.Passport.PassportSerializeUserCa
  * @description Callback function for retrieving the whole user data and attaching it to `req.user` using the email of the user which was serialized
  */
 const deserializeUserCallbackFunction: Interfaces.Passport.PassportDeserializeUserCallback =
-	async (data, done) => {
-		try {
-			const user = await DB.User.getUserFromEmail(data as string);
+  async (data, done) => {
+    try {
+      const user = await DB.User.getUserFromEmail(data as string);
 
-			done(null, user);
-		} catch (err) {
-			done(new Errors.Auth.UserNotFound().message, false);
-		}
-	};
+      done(null, user);
+    } catch (err) {
+      done(new Errors.Auth.UserNotFound().message, false);
+    }
+  };
 
 export {
-	verifyUser,
-	serializeUserCallbackFunction,
-	deserializeUserCallbackFunction,
+  verifyUser,
+  serializeUserCallbackFunction,
+  deserializeUserCallbackFunction,
 };

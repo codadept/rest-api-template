@@ -1,19 +1,19 @@
 import {
-	verifyUser,
-	serializeUserCallbackFunction,
-	deserializeUserCallbackFunction,
+  verifyUser,
+  serializeUserCallbackFunction,
+  deserializeUserCallbackFunction,
 } from "./passport.service";
 import {
-	checkUser,
-	validateUserInput,
-	checkUserInput,
+  checkUser,
+  validateUserInput,
+  checkUserInput,
 } from "./register.service";
 
 export {
-	verifyUser,
-	serializeUserCallbackFunction,
-	deserializeUserCallbackFunction,
-	checkUser,
-	checkUserInput,
-	validateUserInput,
+  verifyUser,
+  serializeUserCallbackFunction,
+  deserializeUserCallbackFunction,
+  checkUser,
+  checkUserInput,
+  validateUserInput,
 };
