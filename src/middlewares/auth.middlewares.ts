@@ -12,7 +12,9 @@ const passportErrorHandler: ErrorRequestHandler = async (
   next
 ) => {
   if (err) {
-    return res.json(new Errors.Auth.AuthenticationError());
+    return res
+      .status(new Errors.Auth.AuthenticationError().status)
+      .json(new Errors.Auth.AuthenticationError());
   } else {
     return next();
   }
@@ -25,7 +27,9 @@ const isLoggedIn: Interfaces.Middleware.Sync = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    return res.json(new Errors.Auth.UserNotLoggedIn());
+    return res
+      .status(new Errors.Auth.UserNotLoggedIn().status)
+      .json(new Errors.Auth.UserNotLoggedIn());
   }
 };
 
@@ -36,7 +40,9 @@ const isNotLoggedIn: Interfaces.Middleware.Sync = (req, res, next) => {
   if (!req.isAuthenticated()) {
     return next();
   } else {
-    return res.json(new Errors.Auth.UserAlreadyLoggedIn());
+    return res
+      .status(new Errors.Auth.UserAlreadyLoggedIn().status)
+      .json(new Errors.Auth.UserAlreadyLoggedIn());
   }
 };
 

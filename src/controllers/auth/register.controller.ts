@@ -12,7 +12,9 @@ const register: Interfaces.Controller.Async = async (req, res) => {
   );
 
   if (checkUserInputErrorReponse) {
-    return res.json(checkUserInputErrorReponse);
+    return res
+      .status(checkUserInputErrorReponse.status)
+      .json(checkUserInputErrorReponse);
   }
 
   const checkUserErrorResponse = await Services.AuthService.checkUser(
@@ -20,7 +22,9 @@ const register: Interfaces.Controller.Async = async (req, res) => {
   );
 
   if (checkUserErrorResponse) {
-    return res.json(checkUserErrorResponse);
+    return res
+      .status(checkUserErrorResponse.status)
+      .json(checkUserErrorResponse);
   }
 
   const validateUserInputErrorResponse = Services.AuthService.validateUserInput(
@@ -28,12 +32,16 @@ const register: Interfaces.Controller.Async = async (req, res) => {
   );
 
   if (validateUserInputErrorResponse) {
-    return res.json(validateUserInputErrorResponse);
+    return res
+      .status(validateUserInputErrorResponse.status)
+      .json(validateUserInputErrorResponse);
   }
 
   await DB.User.createUser(req.body as Interfaces.Auth.RegisterBody);
 
-  return res.json(new Success.Auth.UserCreated());
+  return res
+    .status(new Success.Auth.UserCreated().status)
+    .json(new Success.Auth.UserCreated());
 };
 
 export { register };

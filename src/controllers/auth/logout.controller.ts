@@ -6,7 +6,9 @@ import * as Success from "@success";
  */
 const logout: Interfaces.Controller.Sync = (req, res) => {
   req.logOut();
-  return res.json(new Success.Auth.UserLoggedOut());
+  return res
+    .status(new Success.Auth.UserLoggedOut().status)
+    .json(new Success.Auth.UserLoggedOut());
 };
 
 export { logout };
