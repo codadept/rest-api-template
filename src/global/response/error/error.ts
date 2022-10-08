@@ -1,5 +1,8 @@
 import * as Interfaces from "@interfaces";
 
+/**
+ * @description Custom Error class for Error handling
+ */
 class CustomError<T = string>
 	implements Interfaces.JSONResponse.JSONResponse<T>
 {

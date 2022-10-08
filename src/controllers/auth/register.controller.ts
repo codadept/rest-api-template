@@ -3,7 +3,18 @@ import * as Services from "@services";
 import * as DB from "@db";
 import * as Success from "@success";
 
+/**
+ * @description Controller for registration of user
+ */
 const register: Interfaces.Controller.Async = async (req, res) => {
+	const checkUserInputErrorReponse = Services.AuthService.checkUserInput(
+		req.body as Interfaces.Auth.RegisterBody
+	);
+
+	if (checkUserInputErrorReponse) {
+		return res.json(checkUserInputErrorReponse);
+	}
+
 	const checkUserErrorResponse = await Services.AuthService.checkUser(
 		req.body as Interfaces.Auth.RegisterBody
 	);

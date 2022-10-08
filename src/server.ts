@@ -17,6 +17,8 @@ initializePassport();
 
 const app = express();
 
+// =========================== MIDDLEWARES START ===========================
+
 app
 	.use(
 		cors({
@@ -38,7 +40,13 @@ app
 	.use(passport.initialize())
 	.use(passport.session());
 
+// =========================== MIDDLEWARES END ===========================
+
+// =========================== ROUTES START ===========================
+
 app.use(`${Constants.Server.ROOT}/auth`, Routes.authRouter);
+
+// =========================== ROUTES END ===========================
 
 app.listen(Constants.Server.PORT, () => {
 	console.log(`Server Listening to Port ${Constants.Server.PORT}`);

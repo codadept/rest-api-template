@@ -1,5 +1,8 @@
 import * as Interfaces from "@interfaces";
 
+/**
+ * @description Success Class for success responses
+ */
 class CustomSuccess<T = string>
 	implements Interfaces.JSONResponse.JSONResponse<T>
 {
