@@ -1,5 +1,6 @@
 import { ErrorRequestHandler } from "express";
 import * as Interfaces from "@interfaces";
+import * as Errors from "@error";
 
 const passportErrorHandler: ErrorRequestHandler = async (
 	err,
@@ -18,7 +19,7 @@ const isLoggedIn: Interfaces.Middleware.Sync = (req, res, next) => {
 	if (req.isAuthenticated()) {
 		return next();
 	} else {
-		return res.json("User Not Logged In");
+		return res.json(new Errors.Auth.UserNotLoggedIn());
 	}
 };
 
@@ -26,7 +27,7 @@ const isNotLoggedIn: Interfaces.Middleware.Sync = (req, res, next) => {
 	if (!req.isAuthenticated()) {
 		return next();
 	} else {
-		return res.json("User Already Logged In");
+		return res.json(new Errors.Auth.UserAlreadyLoggedIn());
 	}
 };
 

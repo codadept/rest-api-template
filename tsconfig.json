@@ -16,7 +16,11 @@
 			"@interfaces": ["./src/global/interfaces"],
 			"@interfaces/*": ["./src/global/interfaces/*"],
 			"@constants": ["./src/global/constants"],
-			"@constants/*": ["./src/global/constants/*"]
+			"@constants/*": ["./src/global/constants/*"],
+			"@error": ["./src/global/response/error"],
+			"@error/*": ["./src/global/response/error/*"],
+			"@success": ["./src/global/response/success"],
+			"@success/*": ["./src/global/response/success/*"]
 		},
 		"target": "ES2016",
 		"module": "CommonJS",

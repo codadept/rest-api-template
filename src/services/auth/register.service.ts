@@ -1,17 +1,18 @@
 import * as Interfaces from "@interfaces";
 import * as DB from "@db";
 import * as Constants from "@constants";
+import * as Errors from "@error";
 
 // Returns JSON Response
 const checkUser = async (registerBody: Interfaces.Auth.RegisterBody) => {
 	const { email, username } = registerBody;
 
 	if (await DB.User.getUserFromUsername(username)) {
-		return "Username exist";
+		return new Errors.Auth.UsernameExist();
 	}
 
 	if (await DB.User.getUserFromEmail(email)) {
-		return "Email exist";
+		return new Errors.Auth.EmailExist();
 	}
 
 	return null;
@@ -21,11 +22,11 @@ const validateUserInput = (registerBody: Interfaces.Auth.RegisterBody) => {
 	const { email, password } = registerBody;
 
 	if (!Constants.Auth.EMAIL_REGEX.test(email)) {
-		return "Invalid Email";
+		return new Errors.Auth.InvalidEmail();
 	}
 
 	if (!Constants.Auth.PASSWORD_REGEX.test(password)) {
-		return "Invalid Password";
+		return new Errors.Auth.InvalidPassword();
 	}
 
 	return null;

@@ -3,21 +3,21 @@ import { VerifyFunction } from "passport-local";
 
 import * as DB from "@db";
 import * as Interfaces from "@interfaces";
+import * as Errors from "@error";
 
 import { User } from "@prisma/client";
 
 const verifyUser: VerifyFunction = async (identifier, password, done) => {
-	// Error Handling
 	const user = await DB.User.getUserFromIdentifier(identifier);
 
 	if (!user) {
-		return done("User not found.", false);
+		return done(new Errors.Auth.UserNotFound().message, false);
 	}
 
 	const passwordMatch = await bcrypt.compare(password, user.password);
 
 	if (!passwordMatch) {
-		return done("Username or Password doesn't match", false);
+		return done(new Errors.Auth.UsernameOrPasswordNotMatch().message, false);
 	}
 
 	return done(null, user);
@@ -36,7 +36,7 @@ const deserializeUserCallbackFunction: Interfaces.Passport.PassportDeserializeUs
 
 			done(null, user);
 		} catch (err) {
-			done("User Not Found", false);
+			done(new Errors.Auth.UserNotFound().message, false);
 		}
 	};
 
