@@ -14,19 +14,24 @@ import { User } from "@prisma/client";
  * @description Callback function to verify where the input provided by user matches with that from the DB. Throws error if user is not found or the password is mismatched
  */
 const verifyUser: VerifyFunction = async (identifier, password, done) => {
-  const user = await DB.User.getUserFromIdentifier(identifier);
+  try {
+    const user = await DB.User.getUserFromIdentifier(identifier);
 
-  if (!user) {
-    return done(new Errors.Auth.UserNotFound().message, false);
+    if (!user) {
+      return done(new Errors.Auth.UserNotFound().message, false);
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return done(new Errors.Auth.UsernameOrPasswordNotMatch().message, false);
+    }
+
+    return done(null, user);
+  } catch (err) {
+    console.log("ERROR: ", (err as Error).message);
+    return done(new Errors.Server.InternalServerError(), false);
   }
-
-  const passwordMatch = await bcrypt.compare(password, user.password);
-
-  if (!passwordMatch) {
-    return done(new Errors.Auth.UsernameOrPasswordNotMatch().message, false);
-  }
-
-  return done(null, user);
 };
 
 /**
@@ -51,7 +56,8 @@ const deserializeUserCallbackFunction: Interfaces.Passport.PassportDeserializeUs
 
       done(null, user);
     } catch (err) {
-      done(new Errors.Auth.UserNotFound().message, false);
+      console.log("ERROR: ", (err as Error).message);
+      return done(new Errors.Server.InternalServerError(), false);
     }
   };
 

@@ -12,9 +12,8 @@ const passportErrorHandler: ErrorRequestHandler = async (
   next
 ) => {
   if (err) {
-    return res
-      .status(new Errors.Auth.AuthenticationError().status)
-      .json(new Errors.Auth.AuthenticationError());
+    // Here `err` is of type CustomError
+    return res.status(err.status).json(err);
   } else {
     return next();
   }
