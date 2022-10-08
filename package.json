@@ -23,7 +23,6 @@
 	"license": "GPL-3.0",
 	"dependencies": {
 		"@prisma/client": "^4.4.0",
-		"@types/bcrypt": "^5.0.0",
 		"bcrypt": "^5.1.0",
 		"cookie-parser": "^1.4.6",
 		"cookie-session": "^2.0.0",
@@ -36,6 +35,7 @@
 		"passport-local": "^1.0.0"
 	},
 	"devDependencies": {
+		"@types/bcrypt": "^5.0.0",
 		"@types/cookie-parser": "^1.4.3",
 		"@types/cookie-session": "^2.0.44",
 		"@types/cors": "^2.8.12",
